@@ -1,22 +1,22 @@
 import { Formik, Form, Field } from "formik";
-// import { useDispatch } from "react-redux";
-// import { register } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
 import css from "./RegistrationForm.module.css";
 
 export default function RegistrationForm() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handlSubmit = (value, actions) => {
-  //   dispatch(register(value))
-  //     .unwrap()
-  //     .then((result) => {
-  //       console.log(result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   actions.resetForm();
-  // };
+  const handlSubmit = (value, actions) => {
+    dispatch(register(value))
+      .unwrap()
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    actions.resetForm();
+  };
 
   return (
     <Formik
@@ -25,6 +25,7 @@ export default function RegistrationForm() {
         email: "",
         password: "",
       }}
+      onSubmit={handlSubmit}
     >
       <Form className={css.form} autoComplete="off">
         <label className={css.label}>

@@ -1,15 +1,15 @@
 import { Formik, Form, Field } from "formik";
-// import { useDispatch } from "react-redux";
-// import { logIn } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
 
 export default function LoginForm() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handlSubmit = (values, actions) => {
-  //   dispatch(logIn(values));
-  //   actions.resetForm();
-  // };
+  const handlSubmit = (values, actions) => {
+    dispatch(logIn(values));
+    actions.resetForm();
+  };
 
   return (
     <Formik
@@ -17,7 +17,7 @@ export default function LoginForm() {
         email: "",
         password: "",
       }}
-      // onSubmit={handlSubmit}
+      onSubmit={handlSubmit}
     >
       <Form className={css.form} autoComplete="off">
         <label className={css.label}>

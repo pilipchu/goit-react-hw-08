@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logIn, register, logOut } from "./operations";
+import { logIn, register, logOut, refreshUser } from "./operations";
 import { handlePeding } from "../contacts/slice";
 
 const handleRejected = (state) => {
@@ -14,8 +14,9 @@ const authSlice = createSlice({
       email: null,
     },
     token: null,
-    isLoggenIn: true,
+    isLoggedIn: false,
     isLoading: false,
+    isRefreshing: false,
   },
   extraReducers: (builder) =>
     builder
@@ -24,14 +25,14 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoading = false;
-        state.isLoggenIn = true;
+        state.isLoggedIn = true;
       })
       .addCase(register.rejected, handleRejected)
       .addCase(logIn.pending, handlePeding)
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.isLoggenIn = true;
+        state.isLoggedIn = true;
       })
       .addCase(logIn.rejected, handleRejected)
       .addCase(logOut.pending, handlePeding)
@@ -41,9 +42,17 @@ const authSlice = createSlice({
           email: null,
         };
         state.token = null;
-        state.isLoggenIn = false;
+        state.isLoggedIn = false;
       })
-      .addCase(logOut.rejected, handleRejected),
+      .addCase(logOut.rejected, handleRejected)
+      .addCase(refreshUser.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      }),
 });
 
 export default authSlice.reducer;

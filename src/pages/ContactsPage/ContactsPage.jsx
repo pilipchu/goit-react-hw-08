@@ -1,25 +1,27 @@
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PageTitle from "../../components/PageTitle/PageTitle";
-// import ContactList from "../../components/ConatactList/ContactList";
-// import ContactForm from "../../components/ContactForm/ContactForm";
-// import { fetchContacts } from "../../redux/contacts/operations";
-// import { selectIsLoading } from "../../redux/contacts/slice";
+import ContactList from "../../components/ConatactList/ContactList";
+import ContactForm from "../../components/ContactForm/ContactForm";
+import { fetchContacts } from "../../redux/contacts/operations";
+import { selectIsLoading } from "../../redux/contacts/selectors";
+import SearchBox from "../../components/SearchBar/SearchBar";
 
 export default function ContactPage() {
-  // const dispatch = useDispatch();
-  // const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <>
       <PageTitle>Your contacts</PageTitle>
-      {/* <ContactForm />
+      <ContactForm />
+      <SearchBox />
       <div>{isLoading && "Request in progress...."}</div>
-      <ContactList /> */}
+      <ContactList />
     </>
   );
 }
