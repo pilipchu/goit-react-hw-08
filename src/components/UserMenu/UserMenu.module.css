@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  margin-right: 10px;
+}
+
+.btn {
+  height: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.55px;
+  line-height: 1.3;
+}

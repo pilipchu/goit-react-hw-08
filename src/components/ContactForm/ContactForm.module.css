@@ -5,6 +5,8 @@
   border: 2px solid black;
   margin-bottom: 30px;
   padding: 20px;
+  width: 500px;
+  align-items: center;
 }
 .btn {
   width: 150px;

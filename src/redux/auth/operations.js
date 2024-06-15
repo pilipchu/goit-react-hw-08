@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 const setAuthHeader = (token) => {
@@ -8,6 +9,8 @@ const setAuthHeader = (token) => {
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
+
+export const notify = () => toast.success("Successfully!");
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -28,6 +31,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post("/users/login", userInfo);
       setAuthHeader(res.data.token);
+      notify();
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -39,6 +43,7 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/logout");
     clearAuthHeader();
+    notify();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
