@@ -2,6 +2,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { ImPhone } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
+import { openWindow } from "../../redux/contacts/operations";
 import css from "./Contact.module.css";
 
 export default function Contact({ data: { name, number, id } }) {
@@ -9,6 +10,10 @@ export default function Contact({ data: { name, number, id } }) {
 
   const handledDelete = () => {
     dispatch(deleteContact(id));
+  };
+
+  const openModal = () => {
+    dispatch(openWindow(true, id)); // передати обэктом нейм і емаэл з id
   };
 
   return (
@@ -25,6 +30,9 @@ export default function Contact({ data: { name, number, id } }) {
       </div>
       <button className={css.btn} onClick={handledDelete}>
         Delete
+      </button>
+      <button className={css.btnChang} onClick={openModal}>
+        Change Contact
       </button>
     </div>
   );

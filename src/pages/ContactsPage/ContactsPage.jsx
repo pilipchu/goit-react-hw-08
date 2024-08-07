@@ -6,10 +6,12 @@ import ContactForm from "../../components/ContactForm/ContactForm";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { selectIsLoading } from "../../redux/contacts/selectors";
 import SearchBox from "../../components/SearchBar/SearchBar";
+import ModalWindov from "../../components/ModalWindov/ModalWindov";
 
 export default function ContactPage() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+  // const isOpen = useSelector(selectIsOpen);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -22,6 +24,7 @@ export default function ContactPage() {
       <SearchBox />
       <div>{isLoading && "Request in progress...."}</div>
       <ContactList />
+      <ModalWindov />
     </>
   );
 }
